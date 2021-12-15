@@ -32,7 +32,7 @@ public class PhoneApp {
 			int select = sc.nextInt();
 			
 			if (select == 1) {
-				//리스트
+				//리스트 생성
 				List<Person> pList = new ArrayList<Person>(); 
 				
 				//파일을 읽어 pList를 반환하는 메소드 호출
@@ -43,27 +43,28 @@ public class PhoneApp {
 				
 			} else if (select == 2) {
 				//등록
+				sc.nextLine();
 				System.out.println("<2.등록>");
 				System.out.print(">이름: ");
-				sc.nextLine();
 				String name = sc.nextLine();
 				System.out.print(">휴대전화: ");
 				String hp = sc.nextLine();
 				System.out.print(">회사전화: ");
 				String company = sc.nextLine();
 				
+				//리스트 생성
 				List<Person> pList = new ArrayList<Person>(); 
 				
 				//파일을 읽어 pList를 반환하는 메소드 호출
 				pList = readFile(pList);
 				
-				Person p02 = new Person(name, hp, company);
+				Person p = new Person(name, hp, company);
 				
-				pList.add(p02);
+				pList.add(p);
 				
 				//pList를 입력받아 파일을 쓰는 메소드
 				writeFile(pList);
-				
+			
 				System.out.println("[등록되었습니다.]");
 				System.out.println("");
 				
@@ -73,6 +74,7 @@ public class PhoneApp {
 				System.out.print(">번호 : ");
 				int delNum = sc.nextInt();
 				
+				//리스트 생성
 				List<Person> pList = new ArrayList<Person>(); 
 				
 				//파일을 읽어 pList를 반환하는 메소드 호출
@@ -88,8 +90,30 @@ public class PhoneApp {
 				
 				
 			} else if (select == 4) {
+				//검색
+				sc.nextLine();
+				System.out.println("<4.검색>");
+				System.out.print(">이름: ");
+				String keyword = sc.nextLine();
+				
+				//리스트 생성
+				List<Person> pList = new ArrayList<Person>(); 
+				
+				//파일을 읽어 pList를 반환하는 메소드 호출
+				pList = readFile(pList);
+				
+				//contains(): 문자열에 특정 문자열이 포함되면 true 리턴
+				for(int i=0; i<pList.size(); i++) {
+					if (pList.get(i).getName().contains(keyword)) {
+						System.out.println(i+1 + ".\t" + pList.get(i).getName() + "\t" + pList.get(i).getHp() + "\t" + pList.get(i).getCompany());
+					}
+				}
+				
+				System.out.println("");
+				
 				
 			} else if (select == 5) {
+				//종료
 				System.out.println("");
 				System.out.println("*************************");
 				System.out.println("*        감사합니다        *");
@@ -98,6 +122,7 @@ public class PhoneApp {
 				break;
 				
 			} else {
+				//없는메뉴
 				System.out.println("[다시 입력해 주세요.]");
 				System.out.println("");
 			}
